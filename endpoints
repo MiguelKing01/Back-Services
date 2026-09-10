@@ -1,0 +1,38 @@
+Endpoints Usuarios
+GET http://127.0.0.1:8000/api/usuarios/
+POST    {
+        "id_user": 1,
+        "tipo_user": "estudiante",
+        "documento_user": "123456789",
+        "nombres_user": "Miguel",
+        "apellidos_user": "Galeano",
+        "correo_user": "miguel@gmail.com",
+        "telefono_user": "3001234567",
+        "programa": "Ingeniería de Software",
+        "semestre": 5,
+        "activo": 1,
+        "fecha_creacion": "2026-09-10T20:00:00Z"
+    }
+
+GET USUARIOS GET /api/usuarios/{id}/
+
+PUT /api/usuarios/{id}/
+{
+    "tipo_user": "estudiante",
+    "documento_user": "123456789",
+    "nombres_user": "Miguel Angel",
+    "apellidos_user": "Galeano",
+    "correo_user": "miguelangel@gmail.com",
+    "contrasena_user": "123456",
+    "telefono_user": "3111111111",
+    "programa": "Ingeniería de Software",
+    "semestre": 6,
+    "activo": 1
+}
+
+PATCH /api/usuarios/{id}/
+{
+    "telefono_user": "3205555555"
+}
+
+DELETE /api/usuarios/{id}/
