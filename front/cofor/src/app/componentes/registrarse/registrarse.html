@@ -1,0 +1,47 @@
+<main class="register-page">
+  <section class="register-panel" aria-labelledby="register-title">
+    <aside class="register-brand" aria-label="CO360">
+      
+      <a class="brand" href="#" aria-label="CO360, inicio">CO<span>360</span></a>
+
+      <section class="brand-message">
+        <i aria-hidden="true"></i>
+        <h1>Tu gestión empieza aquí.</h1>
+        <p>Crea tu cuenta y accede a las herramientas de CO360 en un solo lugar.</p>
+      </section>
+
+      <small>Plataforma de gestión</small>
+    </aside>
+
+    <section class="register-form">
+      <p class="eyebrow">Nuevo usuario</p>
+      <h2 id="register-title">Crea tu cuenta</h2>
+      <p class="intro">Completa los datos para registrarte en CO360.</p>
+
+      <form (submit)="register(password.value, confirmation.value); $event.preventDefault()" novalidate>
+        <label for="full-name" class="form-label">Nombre completo</label>
+        <input id="full-name" class="form-control" type="text" placeholder="Nombre y apellido" autocomplete="name" required>
+
+        <label for="register-email" class="form-label mt-1">Correo institucional</label>
+        <input id="register-email" class="form-control" type="email" placeholder="nombre@empresa.com" autocomplete="email" required>
+
+        <label for="new-password" class="form-label mt-1">Contraseña</label>
+        <section class="password-field">
+          <input #password id="new-password" class="form-control" [type]="showPassword() ? 'text' : 'password'" placeholder="Mínimo 8 caracteres" autocomplete="new-password" minlength="8" required>
+          <button class="password-toggle" type="button" (click)="togglePassword()">{{ showPassword() ? 'Ocultar' : 'Ver' }}</button>
+        </section>
+
+        <label for="confirm-password" class="form-label mt-1">Confirmar contraseña</label>
+        <input #confirmation id="confirm-password" class="form-control" [class.is-invalid]="passwordsDoNotMatch()" [type]="showPassword() ? 'text' : 'password'" placeholder="Repite tu contraseña" autocomplete="new-password" required>
+        @if (passwordsDoNotMatch()) {
+          <p class="invalid-feedback d-block">Las contraseñas no coinciden.</p>
+        }
+
+        <button class="btn btn-primary register-button" type="submit">Crear cuenta</button>
+      </form>
+
+      <p class="login-link">¿Ya tienes una cuenta? <button type="button" (click)="returnToLogin()">Inicia sesión</button></p>
+      <p class="register-footer">CO360 · Plataforma de gestión</p>
+    </section>
+  </section>
+</main>
