@@ -1,7 +1,7 @@
 from django.urls import path
 from rest_framework.routers import DefaultRouter
 
-from .views import UsuarioViewSet, LoginView
+from .views import UsuarioViewSet
 
 
 router = DefaultRouter()
@@ -12,6 +12,4 @@ router.register(
     basename='usuario'
 )
 
-urlpatterns = router.urls + [
-    path('token/', LoginView.as_view(), name='token'),
-]
+urlpatterns = router.urls

@@ -1,33 +1,38 @@
-from rest_framework_simplejwt.authentication import JWTAuthentication
-from rest_framework_simplejwt.exceptions import AuthenticationFailed
+from rest_framework.authentication import BaseAuthentication
+from rest_framework.exceptions import AuthenticationFailed
+
+from shared.firebase.authentication import FirebaseAuthentication
 
 from .models import Usuario
 
 
-class UsuarioJWTAuthentication(JWTAuthentication):
+class UsuarioFirebaseAuthentication(BaseAuthentication):
 
-    def get_user(self, validated_token):
+    def authenticate(self, request):
 
-        user_id = validated_token.get('id_user')
+        resultado = FirebaseAuthentication().authenticate(request)
 
-        if user_id is None:
-            raise AuthenticationFailed(
-                'El token no contiene id_user',
-                code='token_not_valid'
-            )
+        if resultado is None:
+            return None
+
+        firebase_uid, decoded_token = resultado
 
         try:
-            usuario = Usuario.objects.get(id_user=user_id)
+
+            usuario = Usuario.objects.get(
+                firebase_uid=firebase_uid
+            )
+
         except Usuario.DoesNotExist:
+
             raise AuthenticationFailed(
-                'Usuario no encontrado',
-                code='token_not_valid'
+                'El usuario no está registrado en el sistema.'
             )
 
         if usuario.activo != 1:
+
             raise AuthenticationFailed(
-                'El usuario está inactivo',
-                code='token_not_valid'
+                'El usuario está inactivo.'
             )
 
-        return usuario
+        return usuario, decoded_token
