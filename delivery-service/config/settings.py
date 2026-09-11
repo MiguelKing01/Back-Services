@@ -39,11 +39,27 @@ INSTALLED_APPS = [
 
     # Librerías
     'rest_framework',
+    'rest_framework_simplejwt',
     'corsheaders',
 
     # Aplicación
     'envios',
 ]
+
+
+# =========================================================
+# REST FRAMEWORK & JWT
+# =========================================================
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+}
+
 
 
 # =========================================================
@@ -113,11 +129,11 @@ import sys
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME', 'cooformacion_db'),
-        'USER': os.getenv('DB_USER', 'postgres'),
-        'PASSWORD': os.getenv('DB_PASSWORD', '12345'),
-        'HOST': os.getenv('DB_HOST', 'localhost'),
-        'PORT': os.getenv('DB_PORT', '5432'),
+        'NAME': 'delivery_db',
+        'USER': 'postgres',
+        'PASSWORD': 'root',
+        'HOST':'localhost',
+        'PORT':'5432',
     }
 }
 

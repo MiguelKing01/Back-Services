@@ -7,43 +7,40 @@ class Envio(models.Model):
         primary_key=True
     )
 
-    numero_guia = models.CharField(
+    codigo_entrega = models.CharField(
         max_length=50,
         unique=True
     )
 
-    id_usuario = models.IntegerField()
+    id_estudiante = models.IntegerField()
 
-    id_empresa = models.IntegerField(
+    id_tarea = models.IntegerField()
+
+    titulo_trabajo = models.CharField(
+        max_length=200
+    )
+
+    descripcion = models.TextField(
         null=True,
         blank=True
     )
 
-    direccion_origen = models.CharField(
-        max_length=255
-    )
-
-    direccion_destino = models.CharField(
-        max_length=255
-    )
-
-    destinatario_nombre = models.CharField(
-        max_length=100
-    )
-
-    destinatario_telefono = models.CharField(
-        max_length=20
+    archivo_url = models.CharField(
+        max_length=500,
+        null=True,
+        blank=True
     )
 
     estado = models.CharField(
         max_length=50,
-        default='pendiente'
+        default='entregado'
     )
 
-    costo_envio = models.DecimalField(
-        max_digits=10,
+    calificacion = models.DecimalField(
+        max_digits=5,
         decimal_places=2,
-        default=0.00
+        null=True,
+        blank=True
     )
 
     activo = models.IntegerField(
@@ -54,7 +51,7 @@ class Envio(models.Model):
         auto_now_add=True
     )
 
-    fecha_entrega_estimada = models.DateTimeField(
+    fecha_limite = models.DateTimeField(
         null=True,
         blank=True
     )
@@ -63,4 +60,5 @@ class Envio(models.Model):
         db_table = 'envios'
 
     def __str__(self):
-        return f"Envio {self.numero_guia} - {self.destinatario_nombre}"
+        return f"Entrega {self.codigo_entrega} - {self.titulo_trabajo}"
+
