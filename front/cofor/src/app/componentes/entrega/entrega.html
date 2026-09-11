@@ -1,0 +1,27 @@
+<main class="delivery-page">
+  <aside class="delivery-menu" aria-label="Menú principal">
+    
+    <a class="delivery-brand" href="#entrega">CO<span>360</span></a>
+    <nav aria-label="Secciones de CO360">
+      <button class="delivery-link" type="button" (click)="openSection('alumnos')">Alumnos</button>
+      <button class="delivery-link" type="button" (click)="openSection('gestion-empresas')">Gestión empresas</button>
+      <button class="delivery-link" type="button" (click)="openSection('empresas')">Empresas</button>
+      <button class="delivery-link active" type="button" (click)="openSection('entrega')">Entrega</button>
+    </nav>
+    <button class="delivery-logout" type="button" (click)="closeSession()">Cerrar sesión</button>
+  </aside>
+  <section class="delivery-content" aria-labelledby="delivery-title">
+    <header class="delivery-header"><section><p class="delivery-eyebrow">Gestión académica</p><h1 id="delivery-title">Entregas</h1></section><section class="delivery-account"><span>UC</span><p><strong>Usuario CO360</strong><small>Administrador</small></p></section></header>
+    @if (creating()) {
+      <form class="delivery-form" (submit)="createEntrega(name.value, closeDate.value, description.value); $event.preventDefault()"><section><h2>Agregar entrega</h2><p>Crea una actividad para que los estudiantes realicen su entrega.</p></section><label class="form-label" for="delivery-name">Nombre de entrega</label><input #name id="delivery-name" class="form-control" placeholder="Nombre de la entrega" required><label class="form-label" for="delivery-close-date">Fecha de cierre</label><input #closeDate id="delivery-close-date" class="form-control" type="date" required><label class="form-label" for="delivery-description">Descripción de tarea</label><textarea #description id="delivery-description" class="form-control" rows="4" placeholder="Describe las instrucciones de la tarea" required></textarea><section class="delivery-form-actions"><button class="btn btn-outline-secondary" type="button" (click)="cancelCreate()">Cancelar</button><button class="btn btn-primary delivery-add" type="submit">Agregar entrega</button></section></form>
+    } @else if (editingId(); as editId) {
+      @for (entrega of entregas(); track entrega.id) { @if (entrega.id === editId) { <form class="delivery-form" (submit)="saveEntrega(entrega.id, name.value, closeDate.value, description.value); $event.preventDefault()"><section><h2>Editar entrega</h2><p>Actualiza los detalles de esta actividad.</p></section><label class="form-label" for="edit-delivery-name">Nombre de entrega</label><input #name id="edit-delivery-name" class="form-control" [value]="entrega.nombre" required><label class="form-label" for="edit-delivery-close-date">Fecha de cierre</label><input #closeDate id="edit-delivery-close-date" class="form-control" type="date" [value]="entrega.fechaCierre" required><label class="form-label" for="edit-delivery-description">Descripción de tarea</label><textarea #description id="edit-delivery-description" class="form-control" rows="4" required>{{ entrega.descripcion }}</textarea><section class="delivery-form-actions"><button class="btn btn-outline-secondary" type="button" (click)="cancelEdit()">Cancelar</button><button class="btn btn-primary delivery-add" type="submit">Guardar cambios</button></section></form> } }
+    } @else {
+      <section class="delivery-toolbar"><label for="delivery-search"><span class="visually-hidden">Buscar entrega</span><input id="delivery-search" class="form-control" type="search" placeholder="Buscar por nombre o descripción" (input)="onSearch($any($event.target).value)"></label><button class="btn btn-primary delivery-add" type="button" (click)="addEntrega()">Agregar entrega</button></section>
+      @if (selectedId() !== null) { <section class="delivery-actions"><span>Entrega seleccionada</span><section><button class="btn btn-outline-primary btn-sm" type="button" (click)="editSelected()">Editar</button><button class="btn btn-outline-danger btn-sm" type="button" (click)="deleteSelected()">Eliminar</button></section></section> }
+      @if (confirmingDelete()) { <section class="delete-confirm" role="alert"><span>¿Seguro que deseas eliminar esta entrega?</span><section><button class="btn btn-sm btn-outline-secondary" type="button" (click)="cancelDelete()">Cancelar</button><button class="btn btn-sm btn-danger" type="button" (click)="confirmDelete()">Sí, eliminar</button></section></section> }
+      @if (message()) { <p class="action-message" role="status">{{ message() }}</p> }
+      <section class="delivery-list" aria-label="Lista de entregas">@for (entrega of filteredEntregas(); track entrega.id) { <button class="delivery-row" type="button" [class.selected]="selectedId() === entrega.id" (click)="selectEntrega(entrega.id)"><span class="check-icon" aria-label="Subido">✓</span><span class="delivery-data"><strong>{{ entrega.nombre }}</strong><small>Fecha de cierre: {{ entrega.fechaCierre }}</small></span><span class="delivery-activity"><strong>Descripción de tarea</strong><small>{{ entrega.descripcion }}</small></span><span class="delivered-status">Subido</span></button> } @empty { <p class="delivery-empty">No se encontraron entregas con esos criterios.</p> }</section>
+    }
+  </section>
+</main>

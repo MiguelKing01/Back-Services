@@ -1,0 +1,42 @@
+.register-page {
+  --co-blue: #153f87;
+  --co-blue-dark: #102f68;
+  --co-red: #d82143;
+  align-items: center;
+  background: #f5f7fb;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+}
+.register-panel { animation: appear .55s ease-out; background: #fff; border-radius: 16px; box-shadow: 0 20px 52px rgba(20,45,89,.12); display: grid; grid-template-columns: minmax(250px,.85fr) minmax(360px,1.15fr); max-width: 920px; min-height: 590px; overflow: hidden; width: 100%; }
+.register-brand { background: var(--co-blue); color: #fff; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; padding: 2.75rem; position: relative; }
+.register-brand::after { border: 36px solid rgba(255,255,255,.09); border-radius: 50%; bottom: -130px; content: ''; height: 290px; position: absolute; right: -130px; width: 290px; }
+.brand, .brand:hover { color: #fff; font-size: 1.75rem; font-weight: 700; letter-spacing: -1px; text-decoration: none; z-index: 1; }
+.university-logo { background: #fff; border-radius: 7px; max-width: 190px; padding: .35rem .55rem; position: relative; width: 100%; z-index: 1; }
+.brand span { color: var(--co-red); }
+.brand-message { max-width: 230px; z-index: 1; }
+.brand-message i { background: var(--co-red); display: block; height: 4px; margin-bottom: 1.1rem; width: 42px; }
+.brand-message h1 { font-size: 1.8rem; font-weight: 700; letter-spacing: -.7px; line-height: 1.18; margin-bottom: .85rem; }
+.brand-message p, .register-brand small { color: rgba(255,255,255,.78); line-height: 1.55; }
+.register-brand small { font-size: .77rem; position: relative; z-index: 1; }
+.register-form { display: flex; flex-direction: column; justify-content: center; padding: 2.7rem clamp(2.25rem,7vw,5rem); }
+.eyebrow { color: #758299; font-size: .75rem; font-weight: 700; letter-spacing: .09em; margin-bottom: .45rem; text-transform: uppercase; }
+.register-form h2 { color: #1b315a; font-size: 1.8rem; font-weight: 700; letter-spacing: -.6px; margin-bottom: .4rem; }
+.intro { color: #718096; font-size: .94rem; margin-bottom: 1.45rem; }
+.form-label { color: #34435d; font-size: .86rem; font-weight: 600; margin-bottom: .48rem; }
+.form-control { border-color: #d2dae7; border-radius: 7px; min-height: 43px; }
+.form-control:focus { border-color: #2861b5; box-shadow: 0 0 0 .2rem rgba(40,97,181,.14); }
+.password-field { position: relative; }
+.password-field .form-control { padding-right: 4.5rem; }
+.password-toggle { background: transparent; border: 0; color: var(--co-blue); font-size: .78rem; font-weight: 700; padding: .35rem; position: absolute; right: .45rem; top: .28rem; }
+.invalid-feedback { font-size: .76rem; margin: .35rem 0 0; }
+.register-button { --bs-btn-bg: var(--co-blue); --bs-btn-border-color: var(--co-blue); --bs-btn-hover-bg: var(--co-blue-dark); --bs-btn-hover-border-color: var(--co-blue-dark); border-radius: 7px; font-weight: 600; margin-top: 1.5rem; min-height: 45px; transition: transform .2s ease, box-shadow .2s ease; width: 100%; }
+.register-button:hover { box-shadow: 0 8px 18px rgba(21,63,135,.2); transform: translateY(-1px); }
+.login-link { color: #718096; font-size: .84rem; margin: 1.25rem 0 0; text-align: center; }
+.login-link button { background: transparent; border: 0; color: var(--co-blue); font: inherit; font-weight: 700; padding: 0; }
+.login-link button:hover { text-decoration: underline; }
+.register-footer { color: #8a96a8; font-size: .74rem; margin: 1.25rem 0 0; text-align: center; }
+@keyframes appear { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 680px) { .register-page { padding: 1rem; } .register-panel { grid-template-columns: 1fr; } .register-brand { min-height: 150px; padding: 1.8rem 2rem; } .university-logo { max-width: 155px; } .brand-message, .register-brand small { display: none; } .register-form { padding: 2.75rem 2rem; } }
+@media (prefers-reduced-motion: reduce) { .register-panel, .register-button { animation: none; transition: none; } }
