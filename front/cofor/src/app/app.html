@@ -1,0 +1,15 @@
+@if (authenticated()) {
+  @if (activeSection() === 'alumnos') {
+    <app-alumnos (logout)="closeSession()" (navigate)="navigateTo($event)"></app-alumnos>
+  } @else if (activeSection() === 'gestion-empresas') {
+    <app-empresas (logout)="closeSession()" (navigate)="navigateTo($event)"></app-empresas>
+  } @else if (activeSection() === 'empresas') {
+    <app-calificacion-empresas (logout)="closeSession()" (navigate)="navigateTo($event)"></app-calificacion-empresas>
+  } @else {
+    <app-entrega (logout)="closeSession()" (navigate)="navigateTo($event)"></app-entrega>
+  }
+} @else if (registrationView()) {
+  <app-registrarse (goToLogin)="openLogin()"></app-registrarse>
+} @else {
+  <app-auth (createAccount)="openRegistration()" (loginSuccess)="enterApplication()"></app-auth>
+}
