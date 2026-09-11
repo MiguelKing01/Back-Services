@@ -22,7 +22,7 @@ SECRET_KEY = 'django-insecure-)wf+o#*+l#phyj3zd6tb_i%cvy%z!=59)b*=+o#6o+6o%#-0jb
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # =========================================================
@@ -107,16 +107,17 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # BASE DE DATOS - POSTGRESQL
 # =========================================================
 
+import os
 import sys
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'cooformacion_db',
-        'USER': 'postgres',
-        'PASSWORD': '12345',
-        'HOST': 'localhost',
-        'PORT': '5432'
+        'NAME': os.getenv('DB_NAME', 'cooformacion_db'),
+        'USER': os.getenv('DB_USER', 'postgres'),
+        'PASSWORD': os.getenv('DB_PASSWORD', '12345'),
+        'HOST': os.getenv('DB_HOST', 'localhost'),
+        'PORT': os.getenv('DB_PORT', '5432'),
     }
 }
 
