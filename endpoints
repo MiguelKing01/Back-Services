@@ -42,44 +42,5 @@ DELETE /api/usuarios/{id}/
 Endpoints Envíos (delivery-service - puerto sugerido 8002)
 ==================================================================
 
-GET http://127.0.0.1:8002/api/envios/
 
-POST http://127.0.0.1:8002/api/envios/
-{
-    "numero_guia": "GUIA-2026-004",
-    "id_usuario": 1,
-    "id_empresa": 1,
-    "direccion_origen": "Calle 45 # 13-22, Bogotá",
-    "direccion_destino": "Carrera 7 # 72-41, Bogotá",
-    "destinatario_nombre": "Laura Martínez",
-    "destinatario_telefono": "3109876543",
-    "estado": "pendiente",
-    "costo_envio": "15000.00",
-    "activo": 1,
-    "fecha_entrega_estimada": "2026-09-13T18:00:00Z"
-}
-
-GET http://127.0.0.1:8002/api/envios/{id}/
-
-PUT http://127.0.0.1:8002/api/envios/{id}/
-{
-    "numero_guia": "GUIA-2026-004",
-    "id_usuario": 1,
-    "id_empresa": 1,
-    "direccion_origen": "Calle 45 # 13-22, Bogotá",
-    "direccion_destino": "Carrera 15 # 85-30, Bogotá",
-    "destinatario_nombre": "Laura Marcela Martínez",
-    "destinatario_telefono": "3109876543",
-    "estado": "en_transito",
-    "costo_envio": "16500.00",
-    "activo": 1,
-    "fecha_entrega_estimada": "2026-09-13T20:00:00Z"
-}
-
-PATCH http://127.0.0.1:8002/api/envios/{id}/
-{
-    "estado": "entregado"
-}
-
-DELETE http://127.0.0.1:8002/api/envios/{id}/
 
