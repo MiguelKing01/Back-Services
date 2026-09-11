@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # Librerías
     'rest_framework',
     'corsheaders',
+    'rest_framework_simplejwt',
 
     # Aplicación
     'usuarios',
@@ -113,7 +114,7 @@ DATABASES = {
         'NAME': 'cooformacion_db',
         'USER': 'postgres',
         'PASSWORD': '12345',
-        'HOST': 'localhost',
+        'HOST': 'host.docker.internal',
         'PORT': '5432'
     }
 }
@@ -167,3 +168,13 @@ STATIC_URL = 'static/'
 # =========================================================
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'usuarios.authentication.UsuarioJWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+}
