@@ -87,7 +87,7 @@ REST_FRAMEWORK = {
 # FIREBASE
 # =========================================================
 
-FIREBASE_CREDENTIALS_PATH = BASE_DIR / 'config' / 'firebase-credentials.json'
+FIREBASE_CREDENTIALS_PATH = BASE_DIR.parent / 'firebase-credentials.json'
 # =========================================================
 # SIMPLE JWT
 # =========================================================
