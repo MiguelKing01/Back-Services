@@ -39,27 +39,12 @@ INSTALLED_APPS = [
 
     # Librerías
     'rest_framework',
-    'rest_framework_simplejwt',
     'corsheaders',
+    'rest_framework_simplejwt',
 
     # Aplicación
     'envios',
 ]
-
-
-# =========================================================
-# REST FRAMEWORK & JWT
-# =========================================================
-
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ),
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    ),
-}
-
 
 
 # =========================================================
@@ -119,30 +104,18 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 
-# =========================================================
-# BASE DE DATOS - POSTGRESQL
-# =========================================================
-
 import os
-import sys
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'delivery_db',
-        'USER': 'postgres',
-        'PASSWORD': 'root',
-        'HOST':'localhost',
-        'PORT':'5432',
+        'NAME': os.getenv('DB_NAME', 'delivery_db'),
+        'USER': os.getenv('DB_USER', 'postgres'),
+        'PASSWORD': os.getenv('DB_PASSWORD', 'root'),
+        'HOST': os.getenv('DB_HOST', 'host.docker.internal'),
+        'PORT': os.getenv('DB_PORT', '5432')
     }
 }
-
-if 'test' in sys.argv:
-    DATABASES['default'] = {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': ':memory:',
-    }
-
 
 
 # =========================================================
@@ -193,3 +166,13 @@ STATIC_URL = 'static/'
 # =========================================================
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'config.authentication.FirebaseAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+}

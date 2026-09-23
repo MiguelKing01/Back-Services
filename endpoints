@@ -39,47 +39,65 @@ DELETE /api/usuarios/{id}/
 
 
 ==================================================================
-Endpoints Envíos (delivery-service - puerto sugerido 8002)
+Endpoints Envíos de Tareas (delivery-service - puerto sugerido 8002 o 8080 en Docker)
 ==================================================================
 
+1. Listar todos los envíos:
 GET http://127.0.0.1:8002/api/envios/
 
+2. Filtrar envíos por parámetros (Query Params):
+GET http://127.0.0.1:8002/api/envios/?id_estudiante=1
+GET http://127.0.0.1:8002/api/envios/?id_tarea=101
+GET http://127.0.0.1:8002/api/envios/?estado=entregado
+GET http://127.0.0.1:8002/api/envios/?codigo_entrega=ENT-2026-001
+
+3. Crear entrega de tarea:
 POST http://127.0.0.1:8002/api/envios/
+Header: Content-Type: application/json
+Body:
 {
-    "numero_guia": "GUIA-2026-004",
-    "id_usuario": 1,
-    "id_empresa": 1,
-    "direccion_origen": "Calle 45 # 13-22, Bogotá",
-    "direccion_destino": "Carrera 7 # 72-41, Bogotá",
-    "destinatario_nombre": "Laura Martínez",
-    "destinatario_telefono": "3109876543",
-    "estado": "pendiente",
-    "costo_envio": "15000.00",
-    "activo": 1,
-    "fecha_entrega_estimada": "2026-09-13T18:00:00Z"
+    "codigo_entrega": "ENT-2026-001",
+    "id_estudiante": 1,
+    "id_tarea": 101,
+    "titulo_trabajo": "Taller 1 - Microservicios en Python",
+    "descripcion": "Entrega del taller de microservicios con Docker y Django DRF.",
+    "archivo_url": "https://storage.cloud.com/entregas/taller1_miguel.pdf",
+    "estado": "entregado",
+    "fecha_limite": "2026-09-15T23:59:59Z"
 }
 
+4. Obtener envío por ID:
 GET http://127.0.0.1:8002/api/envios/{id}/
 
+5. Actualizar envío completo (Calificar):
 PUT http://127.0.0.1:8002/api/envios/{id}/
+Header: Content-Type: application/json
+Body:
 {
-    "numero_guia": "GUIA-2026-004",
-    "id_usuario": 1,
-    "id_empresa": 1,
-    "direccion_origen": "Calle 45 # 13-22, Bogotá",
-    "direccion_destino": "Carrera 15 # 85-30, Bogotá",
-    "destinatario_nombre": "Laura Marcela Martínez",
-    "destinatario_telefono": "3109876543",
-    "estado": "en_transito",
-    "costo_envio": "16500.00",
-    "activo": 1,
-    "fecha_entrega_estimada": "2026-09-13T20:00:00Z"
+    "codigo_entrega": "ENT-2026-001",
+    "id_estudiante": 1,
+    "id_tarea": 101,
+    "titulo_trabajo": "Taller 1 - Microservicios en Python",
+    "descripcion": "Entrega del taller de microservicios con Docker y Django DRF.",
+    "archivo_url": "https://storage.cloud.com/entregas/taller1_miguel.pdf",
+    "estado": "calificado",
+    "calificacion": "5.00",
+    "comentarios_profesor": "Excelente trabajo, cumple con todos los requerimientos.",
+    "activo": 1
 }
 
+6. Actualización parcial de envío:
 PATCH http://127.0.0.1:8002/api/envios/{id}/
+Header: Content-Type: application/json
+Body:
 {
-    "estado": "entregado"
+    "estado": "calificado",
+    "calificacion": "4.80",
+    "comentarios_profesor": "Muy buen trabajo."
 }
 
+7. Eliminar envío:
 DELETE http://127.0.0.1:8002/api/envios/{id}/
+
+
 

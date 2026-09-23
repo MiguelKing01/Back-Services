@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
             name='Envio',
             fields=[
                 ('id_envio', models.AutoField(primary_key=True, serialize=False)),
-                ('codigo_entrega', models.CharField(max_length=50, unique=True)),
+                ('codigo_entrega', models.CharField(blank=True, max_length=50, null=True, unique=True)),
                 ('id_estudiante', models.IntegerField()),
                 ('id_tarea', models.IntegerField()),
                 ('titulo_trabajo', models.CharField(max_length=200)),
@@ -21,6 +21,7 @@ class Migration(migrations.Migration):
                 ('archivo_url', models.CharField(blank=True, max_length=500, null=True)),
                 ('estado', models.CharField(default='entregado', max_length=50)),
                 ('calificacion', models.DecimalField(blank=True, decimal_places=2, max_digits=5, null=True)),
+                ('comentarios_profesor', models.TextField(blank=True, null=True)),
                 ('activo', models.IntegerField(default=1)),
                 ('fecha_creacion', models.DateTimeField(auto_now_add=True)),
                 ('fecha_limite', models.DateTimeField(blank=True, null=True)),
@@ -30,4 +31,5 @@ class Migration(migrations.Migration):
             },
         ),
     ]
+
 
