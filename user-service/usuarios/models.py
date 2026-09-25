@@ -7,13 +7,6 @@ class Usuario(models.Model):
         primary_key=True
     )
 
-    firebase_uid = models.CharField(
-        max_length=128,
-        unique=True,
-        null=True,
-        blank=True
-    )
-
     tipo_user = models.CharField(
         max_length=20
     )
@@ -60,14 +53,6 @@ class Usuario(models.Model):
     fecha_creacion = models.DateTimeField(
         auto_now_add=True
     )
-
-    @property
-    def is_authenticated(self):
-        return True
-
-    @property
-    def is_anonymous(self):
-        return False
 
     def __str__(self):
         return f"{self.nombres_user} {self.apellidos_user}"

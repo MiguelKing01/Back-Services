@@ -1,8 +1,12 @@
-venv/
-__pycache__/
+__pycache__
 *.pyc
-.git/
+*.pyo
+*.pyd
+.venv
+venv
+env
+.git
 .gitignore
-.env
-.vscode/
-.idea/docker --version
+Dockerfile
+.dockerignore
+db.sqlite3

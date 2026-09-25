@@ -37,9 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # Librerías
     'rest_framework',
     'corsheaders',
 
+    # Aplicación
     'usuarios',
 ]
 
@@ -165,13 +167,3 @@ STATIC_URL = 'static/'
 # =========================================================
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'usuarios.authentication.UsuarioFirebaseAuthentication',
-    ),
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    ),
-}
