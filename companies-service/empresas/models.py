@@ -33,5 +33,17 @@ class Company(models.Model):
         auto_now_add=True
     )
 
+    # --- Vínculo con Firebase ---
+    firebase_uid = models.CharField(
+        max_length=128,
+        unique=True,
+        null=True,
+        blank=True
+    )
+
+    @property
+    def is_authenticated(self):
+        return True
+    
     def __str__(self):
         return f"{self.nombre_company} {self.nit_company}"

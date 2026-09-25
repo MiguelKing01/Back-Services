@@ -9,7 +9,9 @@ class Envio(models.Model):
 
     codigo_entrega = models.CharField(
         max_length=50,
-        unique=True
+        unique=True,
+        null=True,
+        blank=True
     )
 
     id_estudiante = models.IntegerField()
@@ -43,6 +45,11 @@ class Envio(models.Model):
         blank=True
     )
 
+    comentarios_profesor = models.TextField(
+        null=True,
+        blank=True
+    )
+
     activo = models.IntegerField(
         default=1
     )
@@ -60,5 +67,5 @@ class Envio(models.Model):
         db_table = 'envios'
 
     def __str__(self):
-        return f"Entrega {self.codigo_entrega} - {self.titulo_trabajo}"
+        return f"Envío #{self.id_envio} - Tarea #{self.id_tarea} (Estudiante #{self.id_estudiante})"
 
