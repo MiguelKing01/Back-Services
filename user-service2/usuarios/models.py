@@ -61,16 +61,5 @@ class Usuario(models.Model):
         auto_now_add=True
     )
 
-<<<<<<< HEAD
-=======
-    @property
-    def is_authenticated(self):
-        return True
-
-    @property
-    def is_anonymous(self):
-        return False
-
->>>>>>> f72d74c67228fa038055226b6b185960280e30f2
     def __str__(self):
         return f"{self.nombres_user} {self.apellidos_user}"

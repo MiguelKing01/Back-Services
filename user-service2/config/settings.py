@@ -113,7 +113,7 @@ DATABASES = {
         'NAME': 'cooformacion_db',
         'USER': 'postgres',
         'PASSWORD': '12345',
-        'HOST': 'host.docker.internal',
+        'HOST': 'localhost',
         'PORT': '5432'
     }
 }
